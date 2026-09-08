@@ -1,317 +1,201 @@
-/* =========================
-   ОСНОВА
-   ========================= */
-
 * {
     box-sizing: border-box;
 }
 
-html {
+html,
+body {
+    margin: 0;
+    padding: 0;
     width: 100%;
     min-height: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
-
     font-family: Arial, sans-serif;
     background: #f5f5f5;
     color: #222;
-
     overflow-x: hidden;
 
-    transition:
-        background 0.25s ease,
-        color 0.25s ease;
+    transition: background 0.2s, color 0.2s;
 }
 
-/* =========================
-   КОНТЕЙНЕР
-   ========================= */
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
 
 .container {
-    width: min(92%, 1100px);
+    width: 90%;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-/* =========================
-   ШАПКА
-   ========================= */
+/* ===== ШАПКА ===== */
 
 header {
     width: 100%;
-    padding: 24px 0;
+    padding: 25px 0;
 }
 
 header .container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
+    gap: 15px;
 }
 
 h1 {
     margin: 0;
-    font-size: clamp(24px, 4vw, 40px);
+    text-align: center;
+    font-size: 34px;
     line-height: 1.2;
 }
 
-/* =========================
-   КНОПКИ
-   ========================= */
+/* ===== КНОПКИ ===== */
 
 button {
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 16px;
 
     font-size: 15px;
     cursor: pointer;
 
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
+    transition: opacity 0.2s, transform 0.1s;
 }
 
 button:hover {
-    opacity: 0.9;
+    opacity: 0.85;
 }
 
 button:active {
     transform: scale(0.97);
 }
 
-/* =========================
-   ПОСТЫ
-   ========================= */
+/* ===== ПОСТЫ ===== */
 
 #posts {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding-bottom: 40px;
+    align-items: center;
 }
 
 .post {
     width: 100%;
-    padding: clamp(16px, 3vw, 26px);
+    max-width: 1000px;
+
+    margin: 0 0 20px 0;
+    padding: 24px;
 
     background: white;
-    border-radius: 16px;
+    border-radius: 12px;
 
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
 
     overflow: hidden;
 }
 
+/* ===== ЗАГОЛОВОК ПОСТА ===== */
+
 .post h2 {
-    margin: 0 0 8px;
-    font-size: clamp(20px, 3vw, 30px);
+    margin: 0 0 8px 0;
+
+    font-size: 27px;
     line-height: 1.25;
+
+    text-align: center;
+
     overflow-wrap: anywhere;
+    word-break: break-word;
 }
+
+/* ===== ДАТА ===== */
 
 .post-date {
-    margin-bottom: 14px;
+    margin-bottom: 15px;
+
     font-size: 14px;
-    opacity: 0.65;
+
+    text-align: center;
+
+    opacity: 0.6;
 }
 
+/* ===== ТЕКСТ ===== */
+
 .post-text {
-    font-size: clamp(15px, 2vw, 18px);
-    line-height: 1.6;
+    width: 100%;
+
+    font-size: 17px;
+    line-height: 1.55;
+
+    text-align: center;
 
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-word;
 }
 
-/* =========================
-   ИЗОБРАЖЕНИЯ
-   ========================= */
+/* ===== КАРТИНКА ===== */
 
 .post-image {
     display: block;
 
-    width: 100%;
+    width: auto;
     max-width: 100%;
     height: auto;
 
-    margin-top: 16px;
+    margin: 18px auto 0 auto;
 
-    border-radius: 12px;
+    border-radius: 10px;
 
     object-fit: contain;
 }
 
-/* =========================
-   ВИДЕО
-   ========================= */
+/* ===== ВИДЕО ===== */
 
 .post-video {
     display: block;
 
-    width: 100%;
+    width: auto;
     max-width: 100%;
     height: auto;
 
     max-height: 650px;
 
-    margin-top: 16px;
+    margin: 18px auto 0 auto;
 
-    border-radius: 12px;
-
-    object-fit: contain;
+    border-radius: 10px;
 
     background: #000;
+
+    object-fit: contain;
 }
 
-/* =========================
-   ТЕЛЕФОН
-   ========================= */
+/* ===== СВЕТЛАЯ ТЕМА ===== */
 
-@media (max-width: 600px) {
-
-    .container {
-        width: 94%;
-    }
-
-    header {
-        padding: 16px 0;
-    }
-
-    header .container {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    button {
-        width: 100%;
-        min-height: 44px;
-    }
-
-    #posts {
-        gap: 14px;
-    }
-
-    .post {
-        padding: 15px;
-        border-radius: 12px;
-    }
-
-    .post-image,
-    .post-video {
-        width: 100%;
-        max-width: 100%;
-        margin-top: 12px;
-        border-radius: 9px;
-    }
-
-    .post-video {
-        max-height: none;
-    }
+body.light {
+    background: #f5f5f5;
+    color: #222;
 }
 
-/* =========================
-   ПЛАНШЕТ
-   ========================= */
-
-@media (min-width: 601px) and (max-width: 1000px) {
-
-    .container {
-        width: 90%;
-    }
-
-    .post {
-        padding: 22px;
-    }
-
-    .post-image,
-    .post-video {
-        max-height: 550px;
-    }
+body.light .post {
+    background: #fff;
 }
 
-/* =========================
-   НОУТБУК / ПК
-   ========================= */
-
-@media (min-width: 1001px) {
-
-    .container {
-        width: min(90%, 1100px);
-    }
-
-    .post {
-        padding: 26px;
-    }
-}
-
-/* =========================
-   БОЛЬШИЕ МОНИТОРЫ
-   ========================= */
-
-@media (min-width: 1600px) {
-
-    .container {
-        width: min(85%, 1200px);
-    }
-
-    .post {
-        padding: 30px;
-    }
-}
-
-/* =========================
-   ГОРИЗОНТАЛЬНЫЙ ТЕЛЕФОН
-   ========================= */
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-    .container {
-        width: 92%;
-    }
-
-    header .container {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    header button {
-        width: auto;
-    }
-
-    .post-video {
-        max-height: 75vh;
-    }
-}
-
-/* =========================
-   ТЁМНАЯ ТЕМА
-   ========================= */
+/* ===== ТЁМНАЯ ТЕМА ===== */
 
 body.dark {
     background: #121212;
-    color: #f2f2f2;
+    color: #eee;
 }
 
 body.dark .post {
     background: #1e1e1e;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* =========================
-   СИНЯЯ ТЕМА
-   ========================= */
+/* ===== СИНЯЯ ТЕМА ===== */
 
 body.blue {
     background: #eef5ff;
@@ -319,12 +203,10 @@ body.blue {
 }
 
 body.blue .post {
-    background: #ffffff;
+    background: #fff;
 }
 
-/* =========================
-   ФИОЛЕТОВАЯ ТЕМА
-   ========================= */
+/* ===== ФИОЛЕТОВАЯ ТЕМА ===== */
 
 body.purple {
     background: #f5efff;
@@ -332,12 +214,10 @@ body.purple {
 }
 
 body.purple .post {
-    background: #ffffff;
+    background: #fff;
 }
 
-/* =========================
-   ЗЕЛЁНАЯ ТЕМА
-   ========================= */
+/* ===== ЗЕЛЁНАЯ ТЕМА ===== */
 
 body.green {
     background: #eef8f1;
@@ -345,15 +225,15 @@ body.green {
 }
 
 body.green .post {
-    background: #ffffff;
+    background: #fff;
 }
 
-/* =========================
-   МЕНЮ ТЕМ
-   ========================= */
+/* ===== МЕНЮ ТЕМ ===== */
 
 .theme-menu {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 8px;
 }
@@ -362,17 +242,184 @@ body.green .post {
     width: auto;
 }
 
-/* На телефоне кнопки тем становятся удобнее */
+/* ===== ПЛАНШЕТ ===== */
+
+@media (max-width: 900px) {
+
+    .container {
+        width: 92%;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .post {
+        padding: 20px;
+    }
+
+    .post h2 {
+        font-size: 24px;
+    }
+
+    .post-text {
+        font-size: 16px;
+    }
+
+    .post-image,
+    .post-video {
+        max-width: 100%;
+    }
+
+    .post-video {
+        max-height: 550px;
+    }
+}
+
+/* ===== ТЕЛЕФОН ===== */
 
 @media (max-width: 600px) {
 
+    .container {
+        width: 94%;
+    }
+
+    header {
+        padding: 18px 0;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .post {
+        width: 100%;
+        padding: 16px;
+
+        margin-bottom: 14px;
+
+        border-radius: 10px;
+    }
+
+    .post h2 {
+        font-size: 21px;
+    }
+
+    .post-date {
+        font-size: 13px;
+    }
+
+    .post-text {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    /* Картинка всегда помещается в пост */
+
+    .post-image {
+        display: block;
+
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        border-radius: 8px;
+    }
+
+    /* Видео всегда помещается в пост */
+
+    .post-video {
+        display: block;
+
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        max-height: none;
+
+        border-radius: 8px;
+    }
+
+    /* Кнопки тем */
+
     .theme-menu {
         width: 100%;
+
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
+
+        gap: 7px;
     }
 
     .theme-menu button {
         width: 100%;
+    }
+}
+
+/* ===== ОЧЕНЬ МАЛЕНЬКИЙ ТЕЛЕФОН ===== */
+
+@media (max-width: 380px) {
+
+    .container {
+        width: 96%;
+    }
+
+    .post {
+        padding: 13px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .post h2 {
+        font-size: 19px;
+    }
+
+    .post-text {
+        font-size: 14px;
+    }
+}
+
+/* ===== ТЕЛЕФОН ГОРИЗОНТАЛЬНО ===== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .container {
+        width: 92%;
+    }
+
+    .post-video {
+        max-height: 75vh;
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+/* ===== БОЛЬШОЙ МОНИТОР ===== */
+
+@media (min-width: 1400px) {
+
+    .container {
+        max-width: 1100px;
+    }
+
+    .post {
+        padding: 26px;
+    }
+}
+
+/* ===== ОЧЕНЬ БОЛЬШОЙ МОНИТОР ===== */
+
+@media (min-width: 1800px) {
+
+    .container {
+        max-width: 1200px;
     }
 }
