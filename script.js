@@ -1,24 +1,63 @@
-const posts = [
-    {
-        title: "Добро пожаловать!",
-        date: "8 сентября 2026",
-        text: "Это первый пост на сайте."
-    }
-];
+fetch("data/posts.json")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Не удалось загрузить посты");
+        }
 
-const container = document.getElementById("posts");
+        return response.json();
+    })
+    .then(posts => {
+        const container = document.getElementById("posts");
 
-container.innerHTML = "";
+        container.innerHTML = "";
 
-posts.forEach(post => {
-    const article = document.createElement("article");
-    article.className = "post";
+        if (!posts.length) {
+            container.innerHTML =
+                "<p>Пока нет опубликованных постов.</p>";
+            return;
+        }
 
-    article.innerHTML = `
-        <h2>${post.title}</h2>
-        <div class="post-date">${post.date}</div>
-        <div class="post-text">${post.text}</div>
-    `;
+        posts.slice().reverse().forEach(post => {
+            const article = document.createElement("article");
 
-    container.appendChild(article);
-});
+            article.className = "post";
+
+            let image = "";
+
+            if (post.image) {
+                image = `
+                    <img
+                        src="${post.image}"
+                        alt=""
+                        class="post-image"
+                    >
+                `;
+            }
+
+            article.innerHTML = `
+                <h2>${post.title}</h2>
+
+                <div class="post-date">
+                    ${post.date}
+                </div>
+
+                ${image}
+
+                <div class="post-text">
+                    ${post.text.replace(/\n/g, "<br>")}
+                </div>
+
+                <div class="post-author">
+                    Автор: ${post.author}
+                </div>
+            `;
+
+            container.appendChild(article);
+        });
+    })
+    .catch(error => {
+        console.error(error);
+
+        document.getElementById("posts").innerHTML =
+            "<p>Не удалось загрузить посты.</p>";
+    });
