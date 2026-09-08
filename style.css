@@ -54,3 +54,149 @@ main {
     white-space: pre-wrap;
     line-height: 1.5;
 }
+/* ==========================================
+   ТЕМЫ
+   ========================================== */
+
+body {
+    transition:
+        background-color 0.25s,
+        color 0.25s;
+}
+
+
+/* Светлая */
+
+body.theme-light {
+    background: #f5f5f5;
+    color: #222;
+}
+
+
+/* Тёмная */
+
+body.theme-dark {
+    background: #121212;
+    color: #eee;
+}
+
+body.theme-dark .post {
+    background: #1e1e1e;
+    color: #eee;
+}
+
+
+/* Синяя */
+
+body.theme-blue {
+    background: #eaf3ff;
+    color: #17324d;
+}
+
+body.theme-blue .post {
+    background: #ffffff;
+}
+
+
+/* Фиолетовая */
+
+body.theme-purple {
+    background: #f4edff;
+    color: #352052;
+}
+
+body.theme-purple .post {
+    background: #ffffff;
+}
+
+
+/* Зелёная */
+
+body.theme-green {
+    background: #edf8f0;
+    color: #173b23;
+}
+
+body.theme-green .post {
+    background: #ffffff;
+}
+
+
+/* ==========================================
+   КНОПКА ТЕМЫ
+   ========================================== */
+
+#theme-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    z-index: 1000;
+}
+
+
+/* ==========================================
+   МЕНЮ ТЕМ
+   ========================================== */
+
+#theme-menu {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2000;
+}
+
+
+.theme-menu-content {
+    background: white;
+    color: #222;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    width: 280px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+.theme-menu-content h3 {
+    margin-top: 0;
+}
+
+
+.theme-menu-content button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
