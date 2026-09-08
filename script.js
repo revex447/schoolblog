@@ -1,15 +1,12 @@
+const POSTS_URL = "data/posts.json?cache=" + Date.now();
+
 // ==========================================
 // ТЕМЫ
 // ==========================================
 
-const savedTheme = localStorage.getItem("theme");
+const savedTheme = localStorage.getItem("theme") || "theme-light";
 
-if (savedTheme) {
-    document.body.className = savedTheme;
-} else {
-    document.body.className = "theme-light";
-}
-
+document.body.className = savedTheme;
 
 // ==========================================
 // КНОПКА ТЕМЫ
@@ -20,11 +17,7 @@ const themeButton = document.createElement("button");
 themeButton.id = "theme-button";
 themeButton.textContent = "🎨 Тема";
 
-document.body.insertBefore(
-    themeButton,
-    document.body.firstChild
-);
-
+document.body.appendChild(themeButton);
 
 // ==========================================
 // МЕНЮ ТЕМ
@@ -32,149 +25,247 @@ document.body.insertBefore(
 
 themeButton.addEventListener("click", () => {
 
-    const menu = document.createElement("div");
+```
+if (document.getElementById("theme-menu")) {
+    return;
+}
 
-    menu.id = "theme-menu";
+const menu = document.createElement("div");
 
-    menu.innerHTML = `
-        <div class="theme-menu-content">
-            <h3>🎨 Выберите тему</h3>
+menu.id = "theme-menu";
 
-            <button data-theme="theme-light">
-                ☀️ Светлая
-            </button>
+menu.innerHTML = `
+    <div class="theme-menu-content">
 
-            <button data-theme="theme-dark">
-                🌙 Тёмная
-            </button>
+        <h3>🎨 Выберите тему</h3>
 
-            <button data-theme="theme-blue">
-                🔵 Синяя
-            </button>
+        <button data-theme="theme-light">
+            ☀️ Светлая
+        </button>
 
-            <button data-theme="theme-purple">
-                🟣 Фиолетовая
-            </button>
+        <button data-theme="theme-dark">
+            🌙 Тёмная
+        </button>
 
-            <button data-theme="theme-green">
-                🟢 Зелёная
-            </button>
+        <button data-theme="theme-blue">
+            🔵 Синяя
+        </button>
 
-            <button id="close-theme">
-                ✖ Закрыть
-            </button>
-        </div>
-    `;
+        <button data-theme="theme-purple">
+            🟣 Фиолетовая
+        </button>
 
-    document.body.appendChild(menu);
+        <button data-theme="theme-green">
+            🟢 Зелёная
+        </button>
 
-    menu.querySelectorAll("[data-theme]").forEach(button => {
+        <button id="close-theme">
+            ✖ Закрыть
+        </button>
 
-        button.addEventListener("click", () => {
+    </div>
+`;
 
-            const theme = button.dataset.theme;
+document.body.appendChild(menu);
 
-            document.body.className = theme;
+menu.querySelectorAll("[data-theme]").forEach(button => {
 
-            localStorage.setItem(
-                "theme",
-                theme
-            );
+    button.addEventListener("click", () => {
 
-            menu.remove();
-        });
+        const theme = button.dataset.theme;
 
+        document.body.className = theme;
+
+        localStorage.setItem("theme", theme);
+
+        menu.remove();
     });
 
-    document
-        .getElementById("close-theme")
-        .addEventListener("click", () => {
-            menu.remove();
-        });
 });
 
+document
+    .getElementById("close-theme")
+    .addEventListener("click", () => {
+        menu.remove();
+    });
+
+menu.addEventListener("click", event => {
+
+    if (event.target === menu) {
+        menu.remove();
+    }
+
+});
+```
+
+});
+
+// ==========================================
+// ЭКРАНИРОВАНИЕ HTML
+// ==========================================
+
+function escapeHTML(value) {
+
+```
+const div = document.createElement("div");
+
+div.textContent = value ?? "";
+
+return div.innerHTML;
+```
+
+}
 
 // ==========================================
 // ЗАГРУЗКА ПОСТОВ
 // ==========================================
 
-fetch("data/posts.json")
-    .then(response => {
+fetch(POSTS_URL, {
+cache: "no-store"
+})
 
-        if (!response.ok) {
-            throw new Error(
-                "Не удалось загрузить посты"
-            );
+.then(response => {
+
+```
+if (!response.ok) {
+    throw new Error(
+        "Не удалось загрузить posts.json"
+    );
+}
+
+return response.json();
+```
+
+})
+
+.then(posts => {
+
+```
+const container =
+    document.getElementById("posts");
+
+if (!container) {
+    throw new Error(
+        "В index.html не найден элемент #posts"
+    );
+}
+
+container.innerHTML = "";
+
+if (!Array.isArray(posts) || posts.length === 0) {
+
+    container.innerHTML =
+        "<p class='empty-posts'>Пока нет опубликованных постов.</p>";
+
+    return;
+}
+
+
+// Новые посты сверху
+posts
+    .slice()
+    .reverse()
+    .forEach(post => {
+
+        const article =
+            document.createElement("article");
+
+        article.className = "post";
+
+
+        const title =
+            escapeHTML(post.title);
+
+        const text =
+            escapeHTML(post.text)
+                .replace(/\n/g, "<br>");
+
+
+        let media = "";
+
+
+        // ==================================
+        // ФОТО
+        // ==================================
+
+        if (post.image) {
+
+            media = `
+                <div class="post-media">
+                    <img
+                        src="${encodeURI(post.image)}"
+                        alt=""
+                        loading="lazy"
+                        class="post-image"
+                    >
+                </div>
+            `;
         }
 
-        return response.json();
-    })
 
-    .then(posts => {
+        // ==================================
+        // ВИДЕО
+        // ==================================
 
-        const container =
-            document.getElementById("posts");
+        if (post.video) {
 
-        container.innerHTML = "";
-
-        if (!posts.length) {
-
-            container.innerHTML =
-                "<p>Пока нет опубликованных постов.</p>";
-
-            return;
-        }
-
-        posts
-            .slice()
-            .reverse()
-            .forEach(post => {
-
-                const article =
-                    document.createElement("article");
-
-                article.className = "post";
-
-                let image = "";
-
-                if (post.image) {
-
-                    image = `
-                        <img
-                            src="${post.image}"
-                            alt=""
-                            class="post-image"
+            media = `
+                <div class="post-media">
+                    <video
+                        class="post-video"
+                        controls
+                        preload="metadata"
+                        playsinline
+                    >
+                        <source
+                            src="${encodeURI(post.video)}"
+                            type="video/mp4"
                         >
-                    `;
-                }
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            `;
+        }
 
-                // НИК АВТОРА ЗДЕСЬ БОЛЬШЕ НЕ ВЫВОДИМ
 
-                article.innerHTML = `
-                    <h2>${post.title}</h2>
+        article.innerHTML = `
+            <h2>${title}</h2>
 
-                    <div class="post-date">
-                        ${post.date}
-                    </div>
+            <div class="post-date">
+                ${escapeHTML(post.date)}
+            </div>
 
-                    ${image}
+            ${media}
 
-                    <div class="post-text">
-                        ${post.text.replace(
-                            /\n/g,
-                            "<br>"
-                        )}
-                    </div>
-                `;
+            <div class="post-text">
+                ${text}
+            </div>
+        `;
 
-                container.appendChild(article);
-            });
-    })
+        container.appendChild(article);
 
-    .catch(error => {
-
-        console.error(error);
-
-        document.getElementById("posts").innerHTML =
-            "<p>Не удалось загрузить посты.</p>";
     });
+```
+
+})
+
+.catch(error => {
+
+```
+console.error(error);
+
+const container =
+    document.getElementById("posts");
+
+if (container) {
+
+    container.innerHTML = `
+        <p class="error-message">
+            Не удалось загрузить посты.
+        </p>
+    `;
+}
+```
+
+});
+
