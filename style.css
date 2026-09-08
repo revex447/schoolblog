@@ -1,202 +1,450 @@
+/* ==========================================
+ОСНОВА
+========================================== */
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  }
+
+html {
+margin: 0;
+padding: 0;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    color: #222;
+margin: 0;
+padding: 80px 20px 40px;
+
+```
+font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+line-height: 1.6;
+
+min-height: 100vh;
+
+transition:
+    background-color 0.25s,
+    color 0.25s;
+```
+
 }
 
+/* ==========================================
+ШАПКА
+========================================== */
+
 header {
-    background: white;
-    padding: 30px 20px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+width: 100%;
+max-width: 900px;
+
+```
+margin: 0 auto 25px;
+
+text-align: center;
+```
+
 }
 
 header h1 {
-    margin: 0;
-    font-size: 30px;
+margin: 0;
+
+```
+font-size: 36px;
+```
+
 }
 
+/* ==========================================
+ПОСТЫ
+========================================== */
+
 main {
-    width: min(800px, 100%);
-    margin: 0 auto;
-    padding: 25px 15px;
+width: 100%;
+max-width: 900px;
+
+```
+margin: 0 auto;
+```
+
 }
 
 #posts {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+width: 100%;
 }
 
 .post {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+width: 100%;
+
+```
+margin: 0 auto 25px;
+
+padding: 24px;
+
+border-radius: 16px;
+
+background: white;
+
+box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.08);
+
+overflow: hidden;
+
+transition:
+    background-color 0.25s,
+    color 0.25s;
+```
+
 }
 
 .post h2 {
-    margin-top: 0;
+margin: 0 0 6px;
+
+```
+font-size: 27px;
+
+line-height: 1.25;
+
+word-wrap: break-word;
+```
+
 }
 
 .post-date {
-    color: #777;
-    font-size: 14px;
-    margin-bottom: 12px;
+margin-bottom: 16px;
+
+```
+font-size: 14px;
+
+opacity: 0.6;
+```
+
 }
 
 .post-text {
-    white-space: pre-wrap;
-    line-height: 1.5;
+font-size: 17px;
+
+```
+overflow-wrap: anywhere;
+
+word-wrap: break-word;
+```
+
 }
+
 /* ==========================================
-   ТЕМЫ
-   ========================================== */
+МЕДИА
+========================================== */
 
-body {
-    transition:
-        background-color 0.25s,
-        color 0.25s;
+.post-media {
+width: 100%;
+
+```
+margin: 15px 0 18px;
+
+text-align: center;
+
+overflow: hidden;
+
+border-radius: 12px;
+```
+
 }
 
+.post-image {
+display: block;
 
-/* Светлая */
+```
+width: 100%;
+max-width: 100%;
+
+height: auto;
+
+margin: 0 auto;
+
+border-radius: 12px;
+
+object-fit: contain;
+```
+
+}
+
+.post-video {
+display: block;
+
+```
+width: 100%;
+max-width: 100%;
+
+height: auto;
+
+max-height: 650px;
+
+margin: 0 auto;
+
+border-radius: 12px;
+
+background: #000;
+```
+
+}
+
+/* ==========================================
+КНОПКА ТЕМЫ
+========================================== */
+
+#theme-button {
+position: fixed;
+
+```
+top: 15px;
+right: 15px;
+
+z-index: 1000;
+
+padding: 10px 15px;
+
+border: none;
+border-radius: 10px;
+
+cursor: pointer;
+
+font-size: 15px;
+
+background: white;
+color: #222;
+
+box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.15);
+```
+
+}
+
+/* ==========================================
+МЕНЮ ТЕМ
+========================================== */
+
+#theme-menu {
+position: fixed;
+
+```
+inset: 0;
+
+z-index: 2000;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+padding: 20px;
+
+background: rgba(0, 0, 0, 0.5);
+```
+
+}
+
+.theme-menu-content {
+width: 100%;
+max-width: 320px;
+
+```
+padding: 24px;
+
+border-radius: 16px;
+
+background: white;
+color: #222;
+
+box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.3);
+```
+
+}
+
+.theme-menu-content h3 {
+margin: 0 0 15px;
+}
+
+.theme-menu-content button {
+display: block;
+
+```
+width: 100%;
+
+margin-top: 10px;
+
+padding: 12px;
+
+border: none;
+
+border-radius: 10px;
+
+cursor: pointer;
+
+font-size: 16px;
+
+background: #f1f1f1;
+color: #222;
+```
+
+}
+
+/* ==========================================
+ТЕМЫ
+========================================== */
 
 body.theme-light {
-    background: #f5f5f5;
-    color: #222;
+background: #f5f5f5;
+color: #222;
 }
 
-
-/* Тёмная */
+body.theme-light .post {
+background: #fff;
+}
 
 body.theme-dark {
-    background: #121212;
-    color: #eee;
+background: #121212;
+color: #eee;
 }
 
 body.theme-dark .post {
-    background: #1e1e1e;
-    color: #eee;
+background: #1e1e1e;
+color: #eee;
 }
 
-
-/* Синяя */
-
 body.theme-blue {
-    background: #eaf3ff;
-    color: #17324d;
+background: #eaf3ff;
+color: #17324d;
 }
 
 body.theme-blue .post {
-    background: #ffffff;
+background: #fff;
 }
 
-
-/* Фиолетовая */
-
 body.theme-purple {
-    background: #f4edff;
-    color: #352052;
+background: #f4edff;
+color: #352052;
 }
 
 body.theme-purple .post {
-    background: #ffffff;
+background: #fff;
 }
 
-
-/* Зелёная */
-
 body.theme-green {
-    background: #edf8f0;
-    color: #173b23;
+background: #edf8f0;
+color: #173b23;
 }
 
 body.theme-green .post {
-    background: #ffffff;
+background: #fff;
 }
 
+/* ==========================================
+СООБЩЕНИЯ
+========================================== */
+
+.empty-posts,
+.error-message {
+text-align: center;
+
+```
+padding: 30px;
+
+opacity: 0.7;
+```
+
+}
 
 /* ==========================================
-   КНОПКА ТЕМЫ
-   ========================================== */
+МОБИЛЬНЫЕ УСТРОЙСТВА
+========================================== */
+
+@media (max-width: 600px) {
+
+```
+body {
+    padding:
+        70px
+        10px
+        25px;
+}
+
+header {
+    margin-bottom: 18px;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+.post {
+    padding: 16px;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+}
+
+.post h2 {
+    font-size: 22px;
+}
+
+.post-text {
+    font-size: 16px;
+}
+
+.post-image {
+    max-height: none;
+}
+
+.post-video {
+    max-height: 500px;
+}
 
 #theme-button {
-    position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
 
-    padding: 10px 15px;
+    padding: 8px 11px;
 
-    border: none;
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    z-index: 1000;
+    font-size: 14px;
 }
-
-
-/* ==========================================
-   МЕНЮ ТЕМ
-   ========================================== */
-
-#theme-menu {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.45);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    z-index: 2000;
-}
-
 
 .theme-menu-content {
-    background: white;
-    color: #222;
+    max-width: 100%;
+}
+```
 
-    padding: 25px;
-
-    border-radius: 15px;
-
-    width: 280px;
-
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
+/* ==========================================
+ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ
+========================================== */
 
-.theme-menu-content h3 {
-    margin-top: 0;
+@media (max-width: 360px) {
+
+```
+body {
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
+.post {
+    padding: 13px;
+}
 
-.theme-menu-content button {
-    display: block;
+.post h2 {
+    font-size: 20px;
+}
 
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 11px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    cursor: pointer;
-
+.post-text {
     font-size: 15px;
 }
+```
+
+}
+
+
